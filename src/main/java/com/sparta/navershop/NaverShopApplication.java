@@ -2,7 +2,9 @@ package com.sparta.navershop;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 
+@ServletComponentScan // @WebServlet 동작하게 함
 @SpringBootApplication
 public class NaverShopApplication {
 
