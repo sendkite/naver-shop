@@ -5,6 +5,7 @@ import com.sparta.navershop.ProductRequestDto;
 import com.sparta.navershop.repository.ProductRepository;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class ProductService {
 
@@ -16,5 +17,12 @@ public class ProductService {
         productRepository.createProduct(product);
 
         return product;
+    }
+
+    public List<Product> getProducts() {
+        ProductRepository productRepository = new ProductRepository();
+        List<Product> products = productRepository.getProducts();
+
+        return products;
     }
 }

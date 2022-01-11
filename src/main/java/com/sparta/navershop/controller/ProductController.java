@@ -6,6 +6,7 @@ import com.sparta.navershop.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
+import java.util.List;
 
 
 @RestController // JSON으로 데이터를 주고받음을 선언합니다.
@@ -16,5 +17,13 @@ public class ProductController {
     public Product createProduct(@RequestBody ProductRequestDto requestDto) throws SQLException {
         ProductService productService = new ProductService();
         return productService.createProduct(requestDto);
+    }
+
+    // 전체 조회
+    @GetMapping("/api/products")
+    public List<Product> getProducts() throws SQLException {
+        ProductService productService = new ProductService();
+        List<Product> products = productService.getProducts();
+        return products;
     }
 }

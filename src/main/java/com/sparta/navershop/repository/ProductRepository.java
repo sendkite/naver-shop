@@ -3,6 +3,8 @@ package com.sparta.navershop.repository;
 import com.sparta.navershop.Product;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductRepository {
 
@@ -33,5 +35,34 @@ public class ProductRepository {
         // DB 연결 해제
         ps.close();
         connection.close();
+    }
+
+    public List<Product> getProducts() throws SQLException {
+        List<Product> products = new ArrayList<>();
+
+        // DB 연결
+        Connection connection = DriverManager.getConnection("jdbc:h2:mem:springcoredb", "sa", "");
+
+        // DB Query 작성 및 실행
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery("select * from product");
+
+        // DB Query 결과를 상품 객체 리스트로 변환
+        while (rs.next()) {
+            Product product = new Product();
+            product.setId(rs.getLong("id"));
+            product.setImage(rs.getString("image"));
+            product.setLink(rs.getString("link"));
+            product.setLprice(rs.getInt("lprice"));
+            product.setMyprice(rs.getInt("myprice"));
+            product.setTitle(rs.getString("title"));
+            products.add(product);
+        }
+
+        // DB 연결 해제
+        rs.close();
+        connection.close();
+
+        return products;
     }
 }
