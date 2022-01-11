@@ -1,27 +1,48 @@
 package com.sparta.navershop.service;
 
-import com.sparta.navershop.Product;
-import com.sparta.navershop.ProductRequestDto;
+import com.sparta.navershop.model.Product;
+import com.sparta.navershop.dto.ProductMypriceRequestDto;
+import com.sparta.navershop.dto.ProductRequestDto;
 import com.sparta.navershop.repository.ProductRepository;
 
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+
+@Service
 public class ProductService {
+    private final ProductRepository productRepository;
+
+    @Autowired
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     public Product createProduct(ProductRequestDto requestDto) throws SQLException {
         // 요청받은 DTO 로 DB에 저장할 객체 만들기
         Product product = new Product(requestDto);
 
-        ProductRepository productRepository = new ProductRepository();
-        productRepository.createProduct(product);
+        productRepository.save(product);
 
         return product;
     }
 
-    public List<Product> getProducts() {
-        ProductRepository productRepository = new ProductRepository();
-        List<Product> products = productRepository.getProducts();
+    public Product updateProduct(Long id, ProductMypriceRequestDto requestDto) throws SQLException {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new NullPointerException("해당 아이디가 존재하지 않습니다."));
+
+        int myprice = requestDto.getMyprice();
+        product.setMyprice(myprice);
+        productRepository.save(product);
+
+        return product;
+    }
+
+    public List<Product> getProducts() throws SQLException {
+        List<Product> products = productRepository.findAll();
 
         return products;
     }

@@ -1,4 +1,4 @@
-package com.sparta.navershop;
+package com.sparta.navershop.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

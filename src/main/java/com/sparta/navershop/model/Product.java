@@ -1,5 +1,6 @@
-package com.sparta.navershop;
+package com.sparta.navershop.model;
 
+import com.sparta.navershop.dto.ProductRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
