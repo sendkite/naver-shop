@@ -40,8 +40,8 @@ public class ProductController {
 
     // 등록된 전체 상품 목록 조회
     @GetMapping("/api/products")
-    public List<Product> getProducts() throws SQLException {
-        List<Product> products = productService.getProducts();
+    public List<Product> getProducts() {
+        List<Product> products = productService.getAllProducts();
 
         // 응답 보내기
         return products;
