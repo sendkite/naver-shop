@@ -3,9 +3,6 @@ package com.sparta.navershop.validator;
 import com.sparta.navershop.dto.ProductRequestDto;
 import org.springframework.stereotype.Component;
 
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.net.URL;
 
 @Component
 public class ProductValidator {
